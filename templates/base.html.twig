@@ -1,0 +1,434 @@
+<!doctype html>
+<html class="no-js" lang="nl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png') }}">
+    <!-- Place favicon.ico in the root directory -->
+
+    {#<link rel="stylesheet" href="css/normalize.css">#}
+    <link rel="stylesheet" href="{{ asset('build/style.css') }}">
+    {#<link rel="stylesheet" href="scss/vendor/font-awesome/css/font-awesome.css">#}
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<nav class="nav">
+    <ul class="nav-left">
+        <li class="name"><a href="#">Job Vink</a></li>
+    </ul>
+    <input type="checkbox" class="nav__checkbox" id="navi-toggle">
+    <label for="navi-toggle" class="nav__button">
+        <span class="nav__icon">&nbsp;</span>
+    </label>
+    <ul class="nav-right">
+        <li><a data-target="#section-competences" href="#">Competenties</a></li>
+        <li><a data-target="#section-portfolio" href="#">Portfolio</a></li>
+        <li><a data-target="#section-timeline" href="#">Tijdlijn</a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="header-text">
+        <h1>Portfolio</h1>
+        <p>Ik ben een hardwerkende student met liefde voor zijn vak.</p>
+    </div>
+</header>
+<main>
+    <section class="section-competences" id="section-competences">
+        <div class="header--secondairy">
+            <h2>Competenties</h2>
+            <p>Hieronder staan alle skills en vaardigheden die ik heb, en alle technieken waar ik mee heb gewerkt.</p>
+        </div>
+        <div>
+            <div class="competences">
+                {% for competence in competences %}
+                    <div class="competence">
+                        <div class="competence__image">
+                            <img src="{{ asset('assets/img/competencies/' ~ competence.logo) }}"
+                                 alt="{{ competence.name }}">
+                        </div>
+                        <div class="competence__description">
+                            <h3>{{ competence.name }}</h3>
+                            <p>{{ competence.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="competence">
+                    <div class="competence__image">
+                        <i id="new-image" data-input="logo" class="fa fa-plus" style="font-size: 10rem;"></i>
+                        <input style="display: none" id="logo" type="file">
+                    </div>
+                    <div class="competence__description">
+                        <input id="name" type="text" placeholder="Title">
+                        <input id="description" type="text" placeholder="Beschrijving">
+                        <input type="submit" style="display: block;" onclick="submit(['name', 'description', 'logo'])">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-portfolio" id="section-portfolio">
+        <div class="header--secondairy">
+            <h2>Portfolio</h2>
+            <p>Een overzicht van al mijn projecten.</p>
+        </div>
+        <div class="portfolios">
+            <div data-modal="#modal1" class="portfolio">
+                <div class="portfolio__image" style="background-image: url('{{ asset('assets/img/portfolio/mod1_front.jpg') }}')">
+                    &nbsp;
+                </div>
+                <div class="portfolio__description">
+                    <h3>Specialisatie project</h3>
+                    <p>Een reis door het spijsverteringskanaal</p>
+                </div>
+            </div>
+            <div data-modal="#modal2" class="portfolio">
+                <div class="portfolio__image" style="background-image: url('{{ asset('assets/img/portfolio/mod2_front.jpg') }}')">
+                    &nbsp;
+                </div>
+                <div class="portfolio__description">
+                    <h3>Interactive website NOS</h3>
+                    <p>Een kijkje in Noord-Korea</p>
+                </div>
+            </div>
+            <div data-modal="#modal3" class="portfolio">
+                <div class="portfolio__image" style="background-image: url('{{ asset('assets/img/portfolio/mod3_front.PNG') }}')">
+                    &nbsp;
+                </div>
+                <div class="portfolio__description">
+                    <h3>Virtual reality</h3>
+                    <p>Ervaar het echte werk</p>
+                </div>
+            </div>
+            <div data-modal="#modal4" class="portfolio">
+                <div class="portfolio__image" style="background-image: url('{{ asset('assets/img/portfolio/mod4_front.png') }}')">
+                    &nbsp;
+                </div>
+                <div class="portfolio__description">
+                    <h3>IoT selution in de retail</h3>
+                    <p>Een slimme kledinghanger</p>
+                </div>
+            </div>
+            <div data-modal="#modal5" class="portfolio">
+                <div class="portfolio__image" style="background-image: url('{{ asset('assets/img/portfolio/mod5_front.png') }}')">
+                    &nbsp;
+                </div>
+                <div class="portfolio__description">
+                    <h3>Baat bij bewind</h3>
+                    <p>Persoonlijke website</p>
+                </div>
+            </div>
+            <div data-modal="#modal6" class="portfolio">
+                <div class="portfolio__image" style="background-image: url('{{ asset('assets/img/portfolio/mod6_front.jpg') }}')">
+                    &nbsp;
+                </div>
+                <div class="portfolio__description">
+                    <h3>Pedicure</h3>
+                    <p>Persoonlijke website</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-timeline" id="section-timeline">
+        <div class="header--secondairy">
+            <h2>Tijdlijn</h2>
+            <p>Een overzicht van mijn werkervaring.</p>
+        </div>
+        <div class="timelines">
+            <div class="timeline">
+                <div class="timeline__description">
+                    <h3>Flora Holland - Logistiek medewerker</h3>
+                    <h4>Juli 2014</h4>
+                    <p>Mijn eerste baan was bij Flora Holland. Hier heb ik bloemen
+                        verplaatst van de ene naar de andere afdeling om ervoor te zorgen dat de bloemen bij de juiste
+                        klant
+                        afgeleverd werden.</p>
+                </div>
+                <div class="timeline__image">
+                    <img src="{{ asset('assets/img/timeline/flora_holland.jpg') }}" alt="Flora Holland">
+                </div>
+            </div>
+            <div class="timeline timeline--right">
+                <div class="timeline__description">
+                    <h3>Studentaanhuis - ICT consultent</h3>
+                    <h4>December 2015 - Oktober 2016</h4>
+                    <p>Bij studentaanhuis kwam ik bij klanten thuis om diverse problemen
+                        op te lossen. Dat kon variëren van e-mail problemen tot nieuwe computers
+                        installeren.</p>
+                </div>
+                <div class="timeline__image">
+                    <img src="{{ asset('assets/img/timeline/studentaanhuis.jpg') }}" alt="Studentaanhuis">
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="timeline__description">
+                    <h3>Hogeschool Leiden - Administratief medewerker</h3>
+                    <h4>Augustus 2016</h4>
+                    <p>Als medewerker heb ik geholpen bij het vervangen van hardeschijven
+                        en RAM-geheugen in ongeveer 3000 computers en werkplekken in de Hogeschool.</p>
+                </div>
+                <div class="timeline__image">
+                    <img src="{{ asset('assets/img/timeline/hogeschool_leiden.png') }}" alt="Hogeschool Leiden">
+                </div>
+            </div>
+            <div class="timeline timeline--right">
+                <div class="timeline__description">
+                    <h3>Hogeschool Leiden - Student-assistent</h3>
+                    <h4>September 2016 - April 2017</h4>
+                    <p>Als student-assistent ben ik mede verantwoordelijk voor het geven van
+                        een aantal werkcolleges aan eerstejaars studenten.</p>
+                </div>
+                <div class="timeline__image">
+                    <img src="{{ asset('assets/img/timeline/hogeschool_leiden.png') }}" alt="Hogeschool Leiden">
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="timeline__description">
+                    <h3>Gemeente Leiden - Inventarisatiemedewerker</h3>
+                    <h4>Augustus 2017</h4>
+                    <p>Tijdens mijn baan bij de gemeente Leiden heb ik meegeholpen aan een
+                        inventarisatie van alle IT faciliteiten, die in beheer zijn van de gemeente Leiden.
+                        Bij deze baan was het belangrijk nauwkeurig te werk te gaan.</p>
+                </div>
+                <div class="timeline__image">
+                    <img src="{{ asset('assets/img/timeline/gemeente_leiden.jpg') }}" alt="Gemeente Leiden">
+                </div>
+            </div>
+            <div class="timeline timeline--right">
+                <div class="timeline__description">
+                    <h3>iSource - Stage</h3>
+                    <h4>September 2017 - Januari 2018</h4>
+                    <p>Bij iSource ga ik aan de slag als webdeveloper.</p>
+                </div>
+                <div class="timeline__image">
+                    <img src="{{ asset('assets/img/timeline/isource.jpg') }}" alt="isource">
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer__content">
+        <p class="footer__description">Gemaakt door Job Vink</p>
+        <div class="social-buttons">
+            <div class="social-button">
+                <a target="_blank" href="https://twitter.com/jobvink"><i class="fa fa-twitter"></i></a>
+            </div>
+            <div class="social-button">
+                <a target="_blank" href="https://www.facebook.com/job.vink"><i class="fa fa-facebook"></i></a>
+            </div>
+            <div class="social-button">
+                <a target="_blank" href="https://www.linkedin.com/in/job-vink-64648812b/"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="popup" id="modal1" role="dialog" tabindex="-1">
+    <div class="popup__close close">
+        &nbsp;
+    </div>
+    <div class="popup__content">
+        <h2>Specialisatie project</h2>
+        <p>Een reis door het spijsverteringsstelsel.</p>
+        <img src="{{ asset('assets/img/portfolio/mod1_1.jpg') }}" alt=""/>
+        <p>Het eerste project dat ik in mijn opleiding gedaan heb, was een project in opdracht van
+            het Boerhaave Museum in Leiden. Wij kregen de opdracht om een interactieve installatie
+            te bouwen voor kinderen tussen de 10 en 14 jaar. Het thema van onze installatie moest
+            gezondheid en lichaam zijn. Mijn projectgroepje heeft er voor gekozen om een reis
+            door het spijsverteringsstelsel te maken.</p>
+        <p>Bij dit project hebben wij intensief nagedacht over de gebruiksvriendelijkheid van onze
+            installatie. Ons doel was om het de kinderen zo makkelijk mogelijk te maken. Dit hebben
+            we gedaan door sterk in te zetten op de gebruiksvriendelijkheid van onze
+            installatie.</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/7NHE-gKHsx8"
+                frameborder="0" allowfullscreen></iframe>
+        <a class="close btn btn--default" href="#section-portfolio"><i class="fa fa-times"></i> Sluit Project</a>
+    </div>
+</div>
+
+<div class="popup" id="modal2" role="dialog" tabindex="-1">
+    <div class="popup__close close">
+        &nbsp;
+    </div>
+    <div class="popup__content">
+        <h2>Interactive website NOS</h2>
+        <p>Een kijkje in Noord-Korea.</p>
+        <img src="{{ asset('assets/img/portfolio/mod2_1.png') }}" alt="">
+        <h3><a href="resources/nos/index.html">Bekijk de website</a></h3>
+        <p>Bij dit project moesten we in opdracht van de NOS een interactieve website maken. De
+            visie van de NOS is om bepaalde verhalen en nieuwsitems uitgebreid uit te lichten in
+            wat de NOS 'specials' noemt. Dit zijn uitgebreide verhalen waar af en toe een
+            interactief element in zit. Een voorbeeld van zo'n interactief verhaal is: <a
+                    href="http://lab.nos.nl/projects/drugs/">"Het DNA van MDMA"</a> van de NOS.</p>
+        <p>Wij kregen de opdracht om zo'n 'special' te maken. We kregen als onderwerp een verhaal
+            over Noord-Korea. Dit is een land waar een totale dictatuur heerst. Wij hebben deze
+            sfeer in onze website naar voren laten komen door na te denken over bijvoorbeeld het
+            kleurgebruik. Daarbij hebben we alle aandachtspunten naar voren laten komen door dit
+            kleurgebruik toe te passen.</p>
+        <a class="close btn btn--default"><i class="fa fa-times"></i> Sluit Project</a>
+    </div>
+</div>
+
+<div class="popup" id="modal3" role="dialog" tabindex="-1">
+    <div class="popup__close close">
+        &nbsp;
+    </div>
+    <div class="popup__content">
+        <h2>Virtual reality</h2>
+        <p>Ervaar het echte werk.</p>
+        <img src="{{ asset('assets/img/portfolio/mod3_1.jpg') }}" alt="">
+        <h3><a href="resources/vr/index.html">Bekijk de website (alleen op firefox)</a></h3>
+        <p>Voor mijn derde project als student bij de Hogeschool Leiden moesten wij een
+            web-applicatie voor virtual reality maken.</p>
+        <p>Mijn projectgenoot en ik hebben besloten om een fietsenwinkel na te bootsen in virtual
+            reality. Het idee achter ons concept was dat je dan het product kunt ervaren zoals het in
+            het werkelijk is.</p>
+        <p>Voor dit project hebben we met A-frame gewerkt. A-frame is een framework gebouwd voor
+            virtual reality in een web omgeving.</p>
+        <a class="close btn btn--default"><i class="fa fa-times"></i> Sluit Project</a>
+    </div>
+</div>
+
+<div class="popup" id="modal4" role="dialog" tabindex="-1">
+    <div class="popup__close close">
+        &nbsp;
+    </div>
+    <div class="popup__content">
+        <h2>IoT selution in de retail</h2>
+        <p>Een slimme kledinghanger.</p>
+        <img src="{{ asset('assets/img/portfolio/mod4_1.jpg') }}" alt="">
+        <p>Voor dit project moesten wij een installatie maken voor een winkel. Wij kwamen met het
+            idee om een slimme kleding-hanger te maken. Het idee was dat de consument zijn maat in
+            kan voeren op het kledingrek, vervolgens licht het lampje van de ingevoerde maat op bij
+            de hanger, zodat de consument direct weet waar zijn maat hangt.</p>
+        <p>De concurrentie van de webshops is tegenwoordig groot. Fysieke winkels kunnen daarom
+            minder personeel inhuren. Het is daarom erg belangrijk om consumenten snel te helpen,
+            zodat het personeel dat er wel staat zo veel mogelijk mensen kunnen helpen.</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/gI9ETe90ML4"
+                frameborder="0" allowfullscreen></iframe>
+        <a class="close btn btn--default"><i class="fa fa-times"></i> Sluit Project</a>
+    </div>
+</div>
+
+<div class="popup" id="modal5" role="dialog" tabindex="-1">
+    <div class="popup__close close">
+        &nbsp;
+    </div>
+    <div class="popup__content">
+        <h2>Baat bij bewind</h2>
+        <img src="{{ asset('assets/img/portfolio/mod5_1.png') }}" alt="Baat bij bewind banner">
+        <h3><a target="_blank" href="https://baatbijbewind.nl">Bekijk de website</a></h3>
+        <p>Deze website heb ik gemaakt voor mijn oom die zzp’er is, en een eigen bedrijf heeft in bewindvoering. Het is
+            belangrijk dat zzp’ers zichtbaar zijn op het internet. Dit kan behaald worden door gebruik te maken van
+            search engine optimization.</p>
+        <p>Een andere handige tip waar ik gebruik van gemaakt heb om deze website zichtbaar te maken op Google is door
+            het bedrijf van deze klant toe te voegen aan google maps via google’s local guide programma. Op deze manier
+            wordt het bedrijf direct zichtbaar als de naam ingetypt wordt op Google. Je moet ook leren letten op
+            kleinere details. Google geeft bijvoorbeeld voorrang aan websites die alleen bereikbaar zijn met https.</p>
+        <img src="{{ asset('assets/img/portfolio/mod5_2.png') }}" alt="Google baat bij bewind">
+        <a class="close btn btn--default"><i class="fa fa-times"></i> Sluit Project</a>
+    </div>
+</div>
+
+<div class="popup" id="modal6" role="dialog" tabindex="-1">
+    <div class="popup__close close">
+        &nbsp;
+    </div>
+    <div class="popup__content">
+        <h2>Pedicuren</h2>
+        <img src="{{ asset('assets/img/portfolio/mod6_1.jpg') }}" alt="Baat bij bewind banner">
+        <h3><a target="_blank" href="https://tenen-voeten.nl">Bekijk de website</a></h3>
+        <p>Deze website heb ik gemaakt voor mijn tante. Mijn tante is pedicure, voor haar is het belangrijk dat haar
+            website de mogelijkheid biedt om informatie te geven over wat ze doet en wat bijvoorbeeld de tarieven van
+            haar praktijk zijn. Ook is het erg belangrijk dat potentiele klanten gemakkelijk contact met haar kunnen
+            leggen. Dit proces kun je verbeteren door kleine dingetjes iets gebruiksvriendelijker te maken, door
+            bijvoorbeeld het telefoonnummer klikbaar te maken, zodat de klant direct op het nummer kan klikken als deze
+            op zijn of haar mobiel de website bezoekt.</p>
+        <a class="close btn btn--default"><i class="fa fa-times"></i> Sluit Project</a>
+    </div>
+</div>
+
+<div class="popup" id="modal7" role="dialog" tabindex="-1">
+    <div class="popup__close close">
+        &nbsp;
+    </div>
+    <div class="popup__content">
+        <h2>Flexscreen website</h2>
+        <h3><a href="https://flexscreen.nl">Bekijk de website</a></h3>
+    </div>
+</div>
+
+
+<script src="{{ asset('build/vendor/modernizr-3.5.0.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+<script src="{{ asset('build/plugins.js') }}"></script>
+<script src="{{ asset('build/main.js') }}"></script>
+<script>
+
+    $('#new-image').on('click', function () {
+        var $this = $(this);
+        var input = $this.data('input');
+        input = document.getElementById(input);
+        console.log('click');
+        input.click();
+        input.addEventListener('change', function () {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $this.replaceWith('<img src="'+e.target.result+'">');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    });
+
+    var submit = function (objects) {
+
+        var data = {};
+
+        objects.forEach(function (value) {
+            data[value] = $('#' + value).val();
+        });
+
+        Object.keys(data).forEach(function (value) {
+            console.log(data[value]);
+        });
+
+        $.post('{{ path('competence_create') }}', data)
+            .done(function (res) {
+                console.log(res);
+            });
+    }
+</script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID.
+<script>
+    window.ga = function () {
+        ga.q.push(arguments)
+    };
+    ga.q = [];
+    ga.l = +new Date;
+    ga('create', 'UA-103564665-1', 'auto');
+    ga('send', 'pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+-->
+</body>
+</html>

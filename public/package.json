@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.17.0",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6"
+  },
+  "dependencies": {
+    "normalize": "^0.3.1",
+    "normalizecss": "^3.0.0"
+  }
+}
