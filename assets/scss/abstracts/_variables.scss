@@ -1,6 +1,8 @@
 $primary-color: #4A1464;
 $secondairy-color: #0056BC;
 
+$color-danger: #EF5350;
+
 $primary-gradient: linear-gradient(to right bottom, $primary-color, $secondairy-color);
 $primary-transparent-gradient: linear-gradient(to right bottom, rgba($primary-color, .7), rgba($secondairy-color, .7));
 

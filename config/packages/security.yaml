@@ -2,17 +2,21 @@ security:
     # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+#        db_provider:
+#            entity:
+#                class: App\Entity\User
+#                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: ~
-
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # https://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # https://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            http_basic: ~
+#            provider: our_db_provider
+    access_control:
+#       require ROLE_ADMIN for /admin*
+        - { path: ^/admin, roles: ROLE_ADMIN }
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt

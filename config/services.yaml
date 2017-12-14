@@ -2,18 +2,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-
-vich_uploader:
-    db_driver: orm
-
-    mappings:
-        competence_logo:
-            uri_prefix:         /images/products
-            upload_destination: '%kernel.root_dir%/../assets/images/products'
-
-            inject_on_load:     false
-            delete_on_update:   true
-            delete_on_remove:   true
+    images: './images'
 
 services:
     # default configuration for services in *this* file

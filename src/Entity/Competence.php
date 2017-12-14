@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompetenceRepository")
  */
-class Competence implements PortfolioInterface
+class Competence implements PortfolioInterface, UpdaterInterface, DeleterInterface
 {
     /**
      * @ORM\Id
@@ -35,7 +35,6 @@ class Competence implements PortfolioInterface
      * @var string
      *
      * @ORM\Column(name="logo", type="string", length=255)
-     * @Vich\UploadableField(mapping="competence_logo", fileNameProperty="competenceName", size="imageSize")
      */
     private $logo;
 
@@ -123,5 +122,10 @@ class Competence implements PortfolioInterface
     public function getAttachmentName()
     {
         return $this->getName();
+    }
+
+    public function getEntityName()
+    {
+        return 'competence';
     }
 }

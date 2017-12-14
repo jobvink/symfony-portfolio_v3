@@ -23,11 +23,9 @@
     @include element('image') {
       width: 25%;
       display: inline-block;
-      float: left;
     }
 
     @include element('description') {
-      width: 75%;
       display: inline-block;
       padding: 0 3rem;
 

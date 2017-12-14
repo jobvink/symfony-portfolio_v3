@@ -55,23 +55,28 @@
         <div>
             <div class="competences">
                 {% for competence in competences %}
-                    <div class="competence">
+                    <div class="competence" {{ deleter.target(competence)|raw }}>
                         <div class="competence__image">
-                            <img src="{{ asset('assets/img/competencies/' ~ competence.logo) }}"
-                                 alt="{{ competence.name }}">
+                            <img src="{{ asset('/images/' ~ competence.logo) }}"
+                                 alt="{{ competence.name }}"
+                                {{ imgupdater.make(competence)|raw }}
+                            >
+                            {{ imgupdater.input(competence)|raw }}
                         </div>
                         <div class="competence__description">
-                            <h3>{{ competence.name }}</h3>
-                            <p>{{ competence.description }}</p>
+                            <h3 {{ updater.make(competence, 'name')|raw }}>{{ competence.name }}</h3>
+                            <p {{ updater.make(competence, 'description')|raw }}>{{ competence.description }}</p>
                         </div>
+                        {{ deleter.button(competence)|raw }}
                     </div>
                 {% endfor %}
                 <div class="competence">
-                    {{ form_start(new.competence) }}
-                    <i class="fa fa-plus plus-img"
-                       data-type="logo"
-                       data-entry="competence"
-                       style="font-size: 5rem;"></i>
+                    {{ form_start(new.competence, {'attr':{'class':'competence'}}) }}
+                    <div class="competence__image">
+                        <i class="fa fa-plus plus-icon plus-img"
+                           data-type="logo"
+                           data-entry="competence"></i>
+                    </div>
                     {{ form_widget(new.competence) }}
                     <input type="submit">
                     {{ form_end(new.competence) }}
@@ -79,6 +84,7 @@
             </div>
         </div>
     </section>
+    <!--
     <section class="section-portfolio" id="section-portfolio">
         <div class="header--secondairy">
             <h2>Portfolio</h2>
@@ -218,6 +224,7 @@
             </div>
         </div>
     </section>
+    -->
 </main>
 
 <footer>
@@ -237,6 +244,7 @@
     </div>
 </footer>
 
+<!--
 <div class="popup" id="modal1" role="dialog" tabindex="-1">
     <div class="popup__close close">
         &nbsp;
@@ -371,7 +379,7 @@
         <h3><a href="https://flexscreen.nl">Bekijk de website</a></h3>
     </div>
 </div>
-
+-->
 
 <script src="{{ asset('build/vendor/modernizr-3.5.0.min.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -382,45 +390,113 @@
 <script>
 
     $('.plus-img').on('click', function () {
+
         var $this = $(this);
         var data_class = $this.data('entry');
         var type = $this.data('type');
+
         input = document.getElementById(data_class + '_' + type);
-        console.log(data_class, type);
-        console.log($('#' + data_class + '_' + type));
+        input.click();
+        input.addEventListener('change', function () {
+
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    $replacement = $('<img>');
+                    $replacement.attr('src', e.target.result);
+                    $replacement.addClass('plus-img');
+                    $replacement.addClass('plus-img');
+                    $replacement.attr('data-type', type);
+
+                    $this.replaceWith($replacement);
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            }
+
+        });
+
+    });
+
+    $('.image-editable').on('click', function () {
+
+        var $this = $(this);
+
+        var url = $this.data('url');
+        var type = $this.data('type');
+        var input = document.getElementById($this.data('input'));
+
         input.click();
         input.addEventListener('change', function () {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $replacement = $('<img>');
-                    $replacement.attr('src', e.target.result);
-                    $replacement.addClass('plus-img');
-                    $replacement.attr('data-type', type);
-                    $this.replaceWith($replacement);
+                    $this.attr('src', e.target.result);
+                    $.post(url,
+                        {'type': type, 'data': e.target.result}, function (res) {
+                            console.log(res);
+                        })
                 };
                 reader.readAsDataURL(input.files[0]);
             }
+            // input.removeEventListener('change', upload);
         });
     });
 
-    var submit = function (objects) {
+    $('.deletable').on('click', function () {
+
+        var $this = $(this);
+        var url = $this.data('url');
+
+        $.post(url);
+
+        var target = $this.data('target');
+        $('#' + target).remove();
+
+    });
+
+    $('.editable').on('click', function () {
+
+        var $this = $(this);
+        $this.attr('contenteditable', true);
+        $this.focus();
 
         var data = {};
 
-        objects.forEach(function (value) {
-            data[value] = $('#' + value).val();
-        });
+        var url = $this.data('url');
 
-        Object.keys(data).forEach(function (value) {
-            console.log(data[value]);
-        });
+        if (!$this.data('locked')) {
 
-        $.post('{{ path('competence_create') }}', data)
-            .done(function (res) {
-                console.log(res);
+            $this.keypress(function (key) {
+
+                if (key.key === "Enter") {
+                    data['type'] = $this.data('type');
+                    data['data'] = $this.html();
+
+                    $this.attr('contenteditable', false);
+
+                    $.post(url, data)
+                        .done(function (res) {
+                            console.log(res);
+                        });
+
+                    $this.data('locked', false);
+                    $this.unbind('keypress');
+
+                }
+
             });
-    }
+
+            $this.data('locked', true);
+
+        }
+
+    });
 </script>
 
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID.
