@@ -1,0 +1,89 @@
+.btn {
+  &, &:link, &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0 1.5rem;
+    display: inline-block;
+    border-radius: 20rem;
+    transition: transform 0.2s, opacity 0.4s;
+    position: relative;
+
+    //Change for the <button> element
+    border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($black, 0.2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active, &:focus{
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 1rem rgba($black, 0.2);
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 20rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+  }
+
+  @include modifier('default') {
+    background: $primary-gradient;
+    color: $white;
+
+    &::after {
+      background-color: $black;
+    }
+  }
+
+  @include modifier('white'){
+    background-color: $white;
+    color: $gray-1;
+
+    &::after {
+      background-color: $white;
+    }
+  }
+
+}
+
+.btn-text {
+  &:link, &:visited {
+    color: $primary-color;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid $primary-color;
+    padding: 3px;
+    transition: all .2s;
+  }
+
+  &:hover {
+    background-color: $primary-color;
+    color: white;
+    -webkit-box-shadow: 0 1rem 2rem rgba($black, 0.15);
+    -moz-box-shadow: 0 1rem 2rem rgba($black, 0.15) ;
+    box-shadow: 0 1rem 2rem rgba($black, 0.15) ;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    -webkit-box-shadow: 0 .5rem 2rem rgba($black, .015);
+    -moz-box-shadow: 0 .5rem 2rem rgba($black, .015);
+    box-shadow: 0 .5rem 2rem rgba($black, .015);
+    transform: translateY(0);
+  }
+}

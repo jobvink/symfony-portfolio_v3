@@ -35,6 +35,7 @@ class Competence implements PortfolioInterface
      * @var string
      *
      * @ORM\Column(name="logo", type="string", length=255)
+     * @Vich\UploadableField(mapping="competence_logo", fileNameProperty="competenceName", size="imageSize")
      */
     private $logo;
 

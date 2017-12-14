@@ -1,0 +1,39 @@
+.name {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 2rem;
+}
+
+.header {
+  @include modifier('secondairy') {
+    h2 {
+      font-size: 4.5rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      display: inline-block;
+      background-image: $primary-gradient;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+      transition: all .2s;
+      width: 100%;
+      text-align: center;
+      @include respond(phone) {
+        font-size: 3rem;
+      }
+    }
+    p {
+      font-size: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $primary-gray-dark;
+      width: 50%;
+      text-align: center;
+      margin: auto;
+
+      @include respond(tab-port) {
+        width: 90%;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

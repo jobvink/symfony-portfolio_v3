@@ -1,0 +1,27 @@
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+@import "base/animations";
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
+
+@import "layout/header";
+@import "layout/navbar";
+@import "layout/grid";
+@import "layout/spacing";
+@import "layout/footer";
+
+@import "components/competences";
+@import "components/portfolios";
+@import "components/popup";
+@import "components/timelines";
+@import "components/buttons";
+
+@import "pages/portfolio";
+
+@import "vendor/normalize/normalize.css";
+@import "vendor/font-awesome/scss/font-awesome";
+
+

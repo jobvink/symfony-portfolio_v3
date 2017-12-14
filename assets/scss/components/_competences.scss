@@ -1,0 +1,55 @@
+
+.competences {
+  @include row;
+
+  .competence {
+    $gutter: 1rem;
+    @include column(4, $gutter: $gutter);
+    display: flex;
+    margin: 5rem $gutter;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+    @include respond(tab-port) {
+      @include column(6, $gutter: $gutter);
+    }
+
+    @include respond(phone) {
+      @include column(12, $gutter: $gutter);
+    }
+
+
+    @include element('image') {
+      width: 25%;
+      display: inline-block;
+      float: left;
+    }
+
+    @include element('description') {
+      width: 75%;
+      display: inline-block;
+      padding: 0 3rem;
+
+      h3 {
+        font-size: 3.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        display: inline-block;
+        letter-spacing: 2px;
+        transition: all .2s;
+        width: 100%;
+      }
+
+      @include respond(phone) {
+        h3 {
+          font-size: 2.5rem;
+        }
+        p {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+  }
+}

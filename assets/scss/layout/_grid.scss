@@ -1,0 +1,16 @@
+@mixin container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+@mixin row($justify-content: flex-start, $align-items: flex-start) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-wrap: wrap;
+}
+
+@mixin column($columns: 1, $column-count: 12, $gutter: 5rem) {
+  width: calc(#{percentage($columns/$column-count)} - #{2*$gutter});
+}
+

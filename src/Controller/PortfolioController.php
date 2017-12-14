@@ -26,9 +26,20 @@ class PortfolioController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('App:Competence');
         $competences = $repo->findAll();
+        $new = [
+            'competence' => $this->createForm(
+                'App\Form\CompetenceType',
+                null,
+                [
+                    'method' => 'POST',
+                    'action' => $this->generateUrl('competence_create')
+                ])
+                ->createView()
+        ];
 
         return $this->render('base.html.twig', [
-            'competences' => $competences
+            'competences' => $competences,
+            'new' => $new
         ]);
     }
 }

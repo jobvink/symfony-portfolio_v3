@@ -1,0 +1,45 @@
+// Spacing Helpers
+
+@mixin generateSpacingHelpers($spacingTypes: (margin, padding), $spacingIncrements: 5, $incrementSize: 5rem, $spacingSides: (top, right, bottom, left)) {
+
+  @each $spacingType in $spacingTypes {
+
+    $spacingTypeShort: str-slice($spacingType, 1, 1);
+
+    @for $i from 0 through $spacingIncrements {
+
+      .#{$spacingTypeShort}-#{$i} {
+        #{$spacingType}: $i*$incrementSize;
+      }
+
+      .#{$spacingTypeShort}-auto {  #{$spacingType}: auto  }
+
+      .#{$spacingTypeShort}y-#{$i} {
+        #{$spacingType}-top: $i*$incrementSize;
+        #{$spacingType}-bottom: $i*$incrementSize;
+      }
+
+      .#{$spacingTypeShort}x-#{$i} {
+        #{$spacingType}-left: $i*$incrementSize;
+        #{$spacingType}-right: $i*$incrementSize;
+      }
+
+      @each $side in $spacingSides {
+        $sideShort: str-slice($side, 1, 1);
+        .#{$spacingTypeShort}#{$sideShort}-#{$i} {
+          #{$spacingType}-#{$side}: $i*$incrementSize;
+        }
+      }
+    }
+  }
+
+  @each $direction in (width, height) {
+    @each $amount in (0, 25, 50, 75, 100) {
+      .#{str_slice($direction, 1, 1)}-#{$amount} {
+        #{$direction}: percentage($amount/100);
+      }
+    }
+  }
+}
+
+@include generateSpacingHelpers;

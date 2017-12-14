@@ -1,0 +1,74 @@
+.timelines {
+  @include container;
+  @include row;
+  position: relative;
+  padding: 10rem 3rem;
+
+  &:before {
+    content: '';
+    @include center-center;
+    width: .2rem;
+    height: 100%;
+    background-color: $gray-1;
+
+    @include respond(tab-port) {
+      left: 80%;
+    }
+  }
+
+  .timeline {
+    display: flex;
+    text-align: right;
+    align-items: center;
+    width: 100%;
+
+    @include respond(tab-port) {
+      text-align: left;
+    }
+
+    @include not-last {
+      margin-bottom: 13rem;
+    }
+
+    @include modifier('right') {
+      flex-direction: row-reverse;
+      text-align: left;
+
+      @include respond(tab-port) {
+        flex-direction: row;
+      }
+    }
+
+    @include element('description') {
+      width: 35%;
+
+      @include respond(tab-port) {
+        width: 65%;
+      }
+
+      @include respond(phone) {
+        width: 60%;
+      }
+    }
+
+    @include element('image') {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 9%;
+
+      @include respond(tab-port) {
+        left: 80%;
+      }
+
+      @include respond(phone) {
+        height: 5%;
+      }
+      img {
+        border: 0.5rem solid $gray-1;
+        border-radius: 50%;
+        height: 100%;
+      }
+    }
+  }
+}

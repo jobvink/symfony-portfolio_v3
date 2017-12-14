@@ -10,9 +10,7 @@ namespace App\Service;
 
 
 use App\Entity\PortfolioInterface;
-use Doctrine\ORM\Mapping\Entity;
 use ErrorException;
-use http\Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PortfolioService
@@ -50,6 +48,8 @@ class PortfolioService
         // $file slaat de geuploadde afbeelding op
         /** @var UploadedFile $file */
         $file = $entity->getAttachment();
+
+        dump(($file));
 
         // genereer een unique naam voor het bestand voor het opgeslagen wordt
         $fileName = preg_replace('/[^A-Za-z0-9_\-]/', '_', $entity->getAttachmentName()) . '.' . $file->guessExtension();

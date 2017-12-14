@@ -1,0 +1,136 @@
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  @include transition(background .2s);
+
+  @include clearfix;
+
+  a, a:link, a:active {
+    color: $white;
+    text-decoration: none;
+  }
+
+  a:hover, a:focus {
+    color: darken($white, 20%);
+  }
+
+  li {
+    display: inline-block;
+    padding: 2rem;
+
+    @include respond(phone) {
+      float: left;
+      display: block;
+      width: 100%;
+      padding: 11px 20px;
+    }
+  }
+
+  .nav-left {
+    float: left;
+  }
+
+  .nav-right {
+    float: right;
+    text-transform: uppercase;
+  }
+
+}
+
+.nav-phone {
+  display: none;
+}
+
+.nav {
+
+  ul {
+    @include transition(opacity .4s);
+  }
+
+  @include element('checkbox') {
+    display: none;
+  }
+  @include respond(phone) {
+    .nav-left {
+      li {
+        padding: 2rem;
+      }
+    }
+    display: block;
+
+    .nav-right {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    //ICON
+    @include element('icon') {
+      position: relative;
+      margin-top: 3.5rem;
+
+      &, &::before, &::after {
+        width: 3rem;
+        height: 2px;
+        background-color: $white;
+        display: inline-block;
+      }
+
+      &::before, &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        transition: all .2s;
+      }
+
+      &::before {
+        top: -.8rem;
+      }
+      &::after {
+        top: .8rem;
+      }
+
+    }
+
+    &__button {
+      height: 7rem;
+      width: 7rem;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2000;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    //FUNCTIONALITY
+    &__checkbox:checked ~ .nav-right {
+      opacity: 1;
+      width: 100%;
+      height: auto;
+    }
+
+    &__button:hover &__icon::before {
+      top: -1rem;
+    }
+
+    &__button:hover &__icon::after {
+      top: 1rem;
+    }
+
+    &__checkbox:checked + &__button &__icon {
+      background-color: transparent;
+      &::before {
+        @include transform(rotate(135deg));
+        top: 0;
+      }
+      &::after {
+        @include transform(rotate(-135deg));
+        top: 0;
+      }
+    }
+
+  }
+}

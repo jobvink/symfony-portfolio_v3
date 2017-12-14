@@ -1,0 +1,54 @@
+.portfolios {
+  @include container;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  padding: 10rem 3rem;
+
+  @include respond(phone) {
+    padding: 7rem 1rem;
+  }
+
+  .portfolio {
+    text-decoration: none;
+    $gutter: 2rem;
+    @include column(4, 12, $gutter: $gutter);
+
+    @include respond(tab-port) {
+      @include column(6, 12, $gutter);
+    }
+
+    @include respond(phone) {
+      @include column(12, 12, $gutter);
+    }
+
+    display: flex;
+    flex-direction: column;
+    margin: 2.5rem $gutter;
+    background-color: $white;
+    @include shadow(.6rem);
+    @include transition(all .4s);
+    color: $primary-gray;
+
+    &:hover {
+      cursor: pointer;
+      @include transform(scale(1.05));
+      @include shadow(1.5rem, $color: rgba($secondairy-color, .4));
+    }
+
+    @include element('image') {
+      display: flex;
+      height: 23rem;
+      background-size: cover;
+      background-position: center;
+      img {
+        width: 100%;
+      }
+    }
+
+    @include element('description') {
+      padding: 2rem 3rem;
+      text-align: center;
+    }
+  }
+}

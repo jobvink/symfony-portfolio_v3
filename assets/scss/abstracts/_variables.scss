@@ -1,0 +1,29 @@
+$primary-color: #4A1464;
+$secondairy-color: #0056BC;
+
+$primary-gradient: linear-gradient(to right bottom, $primary-color, $secondairy-color);
+$primary-transparent-gradient: linear-gradient(to right bottom, rgba($primary-color, .7), rgba($secondairy-color, .7));
+
+//colors
+$white: #fff;
+$black: #000;
+$primary-gray: #686868;
+$primary-gray-light: #eee;
+$primary-gray-dark: #333;
+$gray-1: #e2e2e2;
+
+$computer-width: 1140px;
+$tablet-width: 720px;
+$mobile-width: 540px;
+
+$grid-breakpoints: (
+        default: null,
+        computer: $computer-width,
+        tablet: $tablet-width,
+        mobile: $mobile-width,
+);
+
+$default-grid: (columns: 12, gutter: 5rem);
+$mobile-grid: (columns: 12, gutter: 4rem, media: $computer-width);
+$tablet-grid: (columns: 12, gutter: 5rem, media: $computer-width);
+$computer-grid: (columns: 12, gutter: 6rem, media: $computer-width);

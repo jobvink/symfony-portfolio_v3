@@ -21,25 +21,19 @@ class CompetenceController extends Controller
      */
     public function create(Request $request, PortfolioService $portfolioService) {
 
-        if ($request->get('name') && $request->get('description')) {
+        $competence = new Competence();
+        $form = $this->createForm('App\Form\CompetenceType', $competence);
+        $form->handleRequest($request);
 
-
-
-            $competence = new Competence();
-            $competence->setName($request->get('name'))
-                ->setDescription($request->get('description'));
-
-            dump($request->get('logo'));
-
-            $portfolioService->storeAjaxFile($competence, $request->get('logo'), '/public/assets/img/competenties/');
-
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+//            $portfolioService->storeFile($competence, '/public/assets/img/competence');
             $em->persist($competence);
             $em->flush();
-            return new JsonResponse(['succes' => 'true']);
-        } else {
-            return new JsonResponse(['succes' => false]);
+            return $this->redirectToRoute('home');
         }
+
+        return $this->redirectToRoute('home');
     }
 
 }
