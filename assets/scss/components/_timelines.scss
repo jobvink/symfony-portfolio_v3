@@ -30,7 +30,7 @@
       margin-bottom: 13rem;
     }
 
-    @include modifier('right') {
+    &:nth-child(2n) {
       flex-direction: row-reverse;
       text-align: left;
 

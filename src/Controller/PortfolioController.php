@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Competence;
+use App\Entity\Timeline;
 use App\Service\AttachementUpdater;
 use App\Service\Deleter;
 use App\Service\Updater;
@@ -28,8 +29,11 @@ class PortfolioController extends Controller
     public function portfolio(Updater $updater, Deleter $deleter, AttachementUpdater $attachementUpdater)
     {
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('App:Competence');
-        $competences = $repo->findAll();
+        $competenceRepository = $em->getRepository('App:Competence');
+        $timelineRepository = $em->getRepository('App:Timeline');
+
+        $timelines = $timelineRepository->findAll();
+        $competences = $competenceRepository->findAll();
         $new = [
             'competence' => $this->createForm(
                 'App\Form\CompetenceType',
@@ -38,11 +42,19 @@ class PortfolioController extends Controller
                     'method' => 'POST',
                     'action' => $this->generateUrl('competence_create')
                 ])
-                ->createView()
+                ->createView(),
+            'timeline' => $this->createForm(
+                'App\Form\TimelineType',
+                new Timeline(),
+                [
+                    'method' => 'POST',
+                    'action' => $this->generateUrl('timeline_create')
+                ])->createView()
         ];
 
         return $this->render('base.html.twig', [
             'competences' => $competences,
+            'timelines' => $timelines,
             'new' => $new,
             'updater' => $updater,
             'deleter' => $deleter,

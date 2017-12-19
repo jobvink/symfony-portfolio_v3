@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="manifest" href="site.webmanifest">
-    <link rel="apple-touch-icon" href="icon.png') }}">
+    <link rel="apple-touch-icon" href="icon.png">
     <!-- Place favicon.ico in the root directory -->
 
     {#<link rel="stylesheet" href="css/normalize.css">#}
@@ -59,7 +59,7 @@
                         <div class="competence__image">
                             <img src="{{ asset('/images/' ~ competence.logo) }}"
                                  alt="{{ competence.name }}"
-                                {{ imgupdater.make(competence)|raw }}
+                                    {{ imgupdater.make(competence)|raw }}
                             >
                             {{ imgupdater.input(competence)|raw }}
                         </div>
@@ -147,84 +147,51 @@
             </div>
         </div>
     </section>
+
+    -->
+
     <section class="section-timeline" id="section-timeline">
         <div class="header--secondairy">
             <h2>Tijdlijn</h2>
             <p>Een overzicht van mijn werkervaring.</p>
         </div>
         <div class="timelines">
+
+            {% for timeline in timelines %}
+                <div class="timeline" {{ deleter.target(timeline)|raw }}>
+                    <div class="timeline__description">
+                        <h3>
+                            <span {{ updater.make(timeline, 'employer')|raw }}>{{ timeline.employer }}</span>
+                            -
+                            <span {{ updater.make(timeline, 'function')|raw }}>{{ timeline.function }}</span>
+                        </h3>
+                        <h4>
+                            {{ timeline.beginDate|localdate('nl') }}
+                            {{ timeline.endDate is not empty ? '-' : '' }}
+                            {{ timeline.endDate|localdate }}
+                        </h4>
+                        <p {{ updater.make(timeline, 'description')|raw }} >{{ timeline.description }}</p>
+                        {{ deleter.button(timeline)|raw }}
+                    </div>
+                    <div class="timeline__image">
+                        <img src="{{ asset('images/' ~ timeline.logo) }}" alt="{{ timeline.function }}">
+                    </div>
+                </div>
+            {% endfor %}
             <div class="timeline">
+                {{ form_start(new.timeline, {'attr':{'class':'timeline'}}) }}
                 <div class="timeline__description">
-                    <h3>Flora Holland - Logistiek medewerker</h3>
-                    <h4>Juli 2014</h4>
-                    <p>Mijn eerste baan was bij Flora Holland. Hier heb ik bloemen
-                        verplaatst van de ene naar de andere afdeling om ervoor te zorgen dat de bloemen bij de juiste
-                        klant
-                        afgeleverd werden.</p>
+                    {{ form_widget(new.timeline) }}
+                    <input type="submit">
                 </div>
                 <div class="timeline__image">
-                    <img src="{{ asset('assets/img/timeline/flora_holland.jpg') }}" alt="Flora Holland">
-                </div>
-            </div>
-            <div class="timeline timeline--right">
-                <div class="timeline__description">
-                    <h3>Studentaanhuis - ICT consultent</h3>
-                    <h4>December 2015 - Oktober 2016</h4>
-                    <p>Bij studentaanhuis kwam ik bij klanten thuis om diverse problemen
-                        op te lossen. Dat kon variëren van e-mail problemen tot nieuwe computers
-                        installeren.</p>
-                </div>
-                <div class="timeline__image">
-                    <img src="{{ asset('assets/img/timeline/studentaanhuis.jpg') }}" alt="Studentaanhuis">
-                </div>
-            </div>
-            <div class="timeline">
-                <div class="timeline__description">
-                    <h3>Hogeschool Leiden - Administratief medewerker</h3>
-                    <h4>Augustus 2016</h4>
-                    <p>Als medewerker heb ik geholpen bij het vervangen van hardeschijven
-                        en RAM-geheugen in ongeveer 3000 computers en werkplekken in de Hogeschool.</p>
-                </div>
-                <div class="timeline__image">
-                    <img src="{{ asset('assets/img/timeline/hogeschool_leiden.png') }}" alt="Hogeschool Leiden">
-                </div>
-            </div>
-            <div class="timeline timeline--right">
-                <div class="timeline__description">
-                    <h3>Hogeschool Leiden - Student-assistent</h3>
-                    <h4>September 2016 - April 2017</h4>
-                    <p>Als student-assistent ben ik mede verantwoordelijk voor het geven van
-                        een aantal werkcolleges aan eerstejaars studenten.</p>
-                </div>
-                <div class="timeline__image">
-                    <img src="{{ asset('assets/img/timeline/hogeschool_leiden.png') }}" alt="Hogeschool Leiden">
-                </div>
-            </div>
-            <div class="timeline">
-                <div class="timeline__description">
-                    <h3>Gemeente Leiden - Inventarisatiemedewerker</h3>
-                    <h4>Augustus 2017</h4>
-                    <p>Tijdens mijn baan bij de gemeente Leiden heb ik meegeholpen aan een
-                        inventarisatie van alle IT faciliteiten, die in beheer zijn van de gemeente Leiden.
-                        Bij deze baan was het belangrijk nauwkeurig te werk te gaan.</p>
-                </div>
-                <div class="timeline__image">
-                    <img src="{{ asset('assets/img/timeline/gemeente_leiden.jpg') }}" alt="Gemeente Leiden">
-                </div>
-            </div>
-            <div class="timeline timeline--right">
-                <div class="timeline__description">
-                    <h3>iSource - Stage</h3>
-                    <h4>September 2017 - Januari 2018</h4>
-                    <p>Bij iSource ga ik aan de slag als webdeveloper.</p>
-                </div>
-                <div class="timeline__image">
-                    <img src="{{ asset('assets/img/timeline/isource.jpg') }}" alt="isource">
+                    <i class="fa fa-plus plus-icon plus-img"
+                       data-type="logo"
+                       data-entry="timeline"></i>
                 </div>
             </div>
         </div>
     </section>
-    -->
 </main>
 
 <footer>
